@@ -9,34 +9,46 @@ on:
 jobs:
   build:
     name: Build App
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-22.04, ubuntu-20.04]
+        include:
+          - os: ubuntu-24.04
+            codename: "noble"
+          - os: ubuntu-22.04
+            codename: "jammy"
+          - os: ubuntu-20.04
+            codename: "focal"
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true
+
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: 6.4.2
           host: linux
           target: desktop
           arch: gcc_64
           modules: qtcharts
+
       - name: Install libraries
         run: |
           sudo apt-get install libfuse2
+
       - name: Install build tools
         run: |
           sudo apt-get install -y dh-make devscripts build-essential lintian
-      - name: Build App
+
+      - name: Build and make release
         run: |
           bash ${{ github.workspace }}/release.sh deb
+
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: stacer
+          name: stacer-${{ matrix.codename }}
           path: |
             ${{ github.workspace }}/release/stacer_*.deb
             ${{ github.workspace }}/release/Stacer-*.AppImage

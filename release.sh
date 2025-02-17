@@ -13,7 +13,8 @@ cd ..
 mkdir -p release/$DIR/stacer
 cp -r icons applications debian release/$DIR
 cp -r build/output/* release/$DIR/stacer
-cp icons/hicolor/256x256/apps/stacer.png release/$DIR/stacer/
+cp icons/hicolor/256x256/apps/stacer.png release/$DIR/stacer
+cat applications/stacer.desktop > release/$DIR/stacer/default.desktop
 
 # translations
 lupdate stacer/stacer.pro -no-obsolete
@@ -30,7 +31,7 @@ unset QT_PLUGIN_PATH
 unset LD_LIBRARY_PATH
 
 ./linuxdeployqt-continuous-x86_64.AppImage release/$DIR/stacer/stacer -bundle-non-qt-libs -no-translations -unsupported-allow-new-glibc -appimage
-mv Stacer-*.AppImage release/Stacer-$VERSION-x86_64.AppImage
+mv Stacer-$VERSION-x86_64.AppImage release
 
 rm linuxdeployqt-continuous-x86_64.AppImage
 

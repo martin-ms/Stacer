@@ -43,7 +43,7 @@ jobs:
 
       - name: Build and make release
         run: |
-          bash ${{ github.workspace }}/release.sh deb
+          bash ${{ github.workspace }}/release.sh
 
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
@@ -52,3 +52,17 @@ jobs:
           path: |
             ${{ github.workspace }}/release/stacer_*.deb
             ${{ github.workspace }}/release/Stacer-*.AppImage
+
+      - name: Publish PPA package
+        uses: yuezk/publish-ppa-package@main
+        if: matrix.codename == 'noble'
+        with:
+          tarball: ${{ github.workspace }}/release/stacer-*.tar.gz
+          debian_dir: ${{ github.workspace }}/debian/
+          repository: "quentiumyt/stacer"
+          deb_email: "pro@quentium.fr"
+          deb_fullname: "Quentin Lienhardt"
+          gpg_private_key: ${{ secrets.PPA_GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.PPA_GPG_PASSPHRASE }}
+          series: "noble jammy focal"
+          new_version_template: "{VERSION}-{REVISION}+{SERIES}"

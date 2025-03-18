@@ -22,6 +22,9 @@ lrelease stacer/stacer.pro
 mkdir -p release/$DIR/stacer/translations
 mv translations/*.qm release/$DIR/stacer/translations
 
+# tarball
+tar -czf release/$DIR.tar.gz -C release $DIR
+
 # linuxdeployqt
 wget -qc https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
 chmod +x linuxdeployqt-continuous-x86_64.AppImage
@@ -35,8 +38,6 @@ mv Stacer-$VERSION-x86_64.AppImage release
 
 rm linuxdeployqt-continuous-x86_64.AppImage
 
-if [ "$1" == "deb" ]; then
-    cd release/$DIR
-    dh_make --createorig --indep --yes
-    debuild --no-lintian -us -uc
-fi
+cd release/$DIR
+dh_make --createorig --indep --yes
+debuild --no-lintian -us -uc

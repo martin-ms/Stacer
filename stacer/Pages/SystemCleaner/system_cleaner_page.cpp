@@ -1,4 +1,4 @@
-﻿#include "system_cleaner_page.h"
+#include "system_cleaner_page.h"
 #include "ui_system_cleaner_page.h"
 #include "byte_tree_widget.h"
 

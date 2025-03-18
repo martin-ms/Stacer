@@ -1,3 +1,12 @@
+stacer (1.3.3-1) focal; urgency=medium
+
+  * /!\ Last build before drop Ubuntu 20.04 LTS support
+  * Fix AppImage build (.desktop fail)
+  * Use matrix to build on GitHub Actions
+  * Fix glib version issues with old builds thanks to new GitHub Actions PPA publishing
+
+ -- Quentin Lienhardt <pro@quentium.fr>  Tue, 14 Apr 2025 12:00:00 +0100
+
 stacer (1.3.2-1) focal; urgency=medium
 
   * Fix search process not working #6

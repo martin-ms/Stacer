@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     qApp->setApplicationName("stacer");
     qApp->setApplicationDisplayName("Stacer");
-    qApp->setApplicationVersion("1.3.2");
+    qApp->setApplicationVersion("1.3.3");
     qApp->setWindowIcon(QIcon(":/static/logo.png"));
 
     {

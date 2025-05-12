@@ -15,8 +15,10 @@ jobs:
         include:
           - os: ubuntu-24.04
             codename: "noble"
+            qt_version: "6.4.2"
           - os: ubuntu-22.04
             codename: "jammy"
+            qt_version: "6.2.4"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -25,7 +27,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: 6.2.4
+          version: ${{ matrix.qt_version }}
           host: linux
           target: desktop
           arch: gcc_64

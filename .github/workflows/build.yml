@@ -51,6 +51,7 @@ jobs:
           name: stacer-${{ matrix.codename }}
           path: |
             ${{ github.workspace }}/release/stacer_*.deb
+            ${{ github.workspace }}/release/stacer-*.rpm
             ${{ github.workspace }}/release/Stacer-*.AppImage
 
       - name: Publish PPA package

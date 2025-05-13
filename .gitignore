@@ -1,4 +1,7 @@
 .vscode/
 build/
 release/
+rpm/BUILDROOT/
+rpm/*RPMS/
+rpm/SOURCES/
 lqt

@@ -3,13 +3,14 @@ VERSION=1.3.4
 DIR=stacer-$VERSION
 export VERSION=$VERSION
 
-rm -rf release build
+rm -rf release build rpm/BUILDROOT rpm/*RPMS rpm/SOURCES
 mkdir release build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=g++ ..
 make -j $(nproc)
 cd ..
 
+# assets
 mkdir -p release/$DIR/stacer
 cp -r icons applications debian release/$DIR
 cp -r build/output/* release/$DIR/stacer
@@ -33,11 +34,20 @@ unset QTDIR
 unset QT_PLUGIN_PATH
 unset LD_LIBRARY_PATH
 
+# appimage
 ./linuxdeployqt-continuous-x86_64.AppImage release/$DIR/stacer/stacer -bundle-non-qt-libs -no-translations -unsupported-allow-new-glibc -appimage
 mv Stacer-$VERSION-x86_64.AppImage release
 
 rm linuxdeployqt-continuous-x86_64.AppImage
 
+# deb binary
 cd release/$DIR
 dh_make --createorig --indep --yes
 debuild --no-lintian -us -uc
+cd ../..
+
+# rpm binary
+mkdir -p rpm/SOURCES/
+cp release/$DIR.tar.gz rpm/SOURCES/
+rpmbuild -bb --build-in-place --define "_topdir $(pwd)/rpm" rpm/SPECS/stacer.spec
+mv rpm/RPMS/x86_64/stacer-$VERSION-1.x86_64.rpm release/stacer-$VERSION.x86_64.rpm

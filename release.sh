@@ -3,12 +3,13 @@ VERSION=1.3.5
 DIR=stacer-$VERSION
 export VERSION=$VERSION
 
+# cleanup
 rm -rf release build rpm/BUILDROOT rpm/*RPMS rpm/SOURCES
-mkdir release build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=g++ ..
-make -j $(nproc)
-cd ..
+
+# build
+cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build build -j $(nproc)
+strip -s build/output/stacer build/output/lib/libstacer-core.a
 
 # assets
 mkdir -p release/$DIR/stacer

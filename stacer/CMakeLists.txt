@@ -46,8 +46,10 @@ target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION
 
 # Running LTO in Release builds, if the C++ compiler is GNU GCC
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release"  AND  "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  target_compile_options(${PROJECT_NAME}  PRIVATE  "-flto")
-  list(APPEND CMAKE_EXE_LINKER_FLAGS "-flto")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE OFF)
+  #target_compile_options(${PROJECT_NAME}  PRIVATE  "-flto")
+  #list(APPEND CMAKE_EXE_LINKER_FLAGS "-flto")
 endif()
 
 install(

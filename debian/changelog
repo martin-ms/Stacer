@@ -1,3 +1,12 @@
+stacer (1.3.6-1) stable; urgency=medium
+
+  * Add arm64 builds with GitHub Actions (deb, rpm and AppImage)
+  * Add arm64, armhf, i386, powerpc, ppc64el, riscv64, s390x builds to PPA
+  * Fix build no longer included in PPA publishing (rely on CMake to install bin and assets)
+  * Build type as release & use CMake instead of make
+
+ -- Quentin Lienhardt <pro@quentium.fr>  Tue, 11 Sep 2025 17:00:00 +0100
+
 stacer (1.3.5-1) stable; urgency=medium
 
   * Fix debian dependencies & update README #7 and #8
@@ -5,7 +14,7 @@ stacer (1.3.5-1) stable; urgency=medium
   * Build with OS Qt version (for Ubuntu 24.04)
   * Add back rpm build
 
- -- Quentin Lienhardt <pro@quentium.fr>  Tue, 13 Apr 2025 12:00:00 +0100
+ -- Quentin Lienhardt <pro@quentium.fr>  Tue, 13 May 2025 12:00:00 +0100
 
 stacer (1.3.4-1) stable; urgency=medium
 

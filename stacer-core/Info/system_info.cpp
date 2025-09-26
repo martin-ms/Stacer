@@ -150,7 +150,9 @@ QFileInfoList SystemInfo::getAppCaches() const
     QList cacheLocations = {
         homePath + "/.npm/_cacache",
         homePath + "/.bun/install/cache",
+        homePath + "/.m2/repository",
         homePath + "/.gradle/caches",
+        homePath + "/.cargo/registry",
         homePath + "/.expo/versions-cache",
         homePath + "/.expo/native-modules-cache",
     };
@@ -162,11 +164,19 @@ QFileInfoList SystemInfo::getAppCaches() const
         for (const QString &folder : configFolders) {
             QString cachePath = configDir.filePath(folder + "/Cache");
             QString gpuCachePath = configDir.filePath(folder + "/GPUCache");
+            QString codeCachePath = configDir.filePath(folder + "/Code Cache");
+            QString dawnCachePath = configDir.filePath(folder + "/DawnCache");
             if (QDir(cachePath).exists()) {
                 cacheLocations.append(cachePath);
             }
             if (QDir(gpuCachePath).exists()) {
                 cacheLocations.append(gpuCachePath);
+            }
+            if (QDir(codeCachePath).exists()) {
+                cacheLocations.append(codeCachePath);
+            }
+            if (QDir(dawnCachePath).exists()) {
+                cacheLocations.append(dawnCachePath);
             }
         }
     }

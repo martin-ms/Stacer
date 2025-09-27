@@ -42,7 +42,6 @@ class StartupApp : public QWidget
 
   private:
     QString mStartupAppName;
-    QString mAppComment;
     bool mEnabled;
     QString mFilePath;
 };

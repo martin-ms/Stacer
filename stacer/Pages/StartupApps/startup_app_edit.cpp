@@ -17,12 +17,16 @@ StartupAppEdit::StartupAppEdit(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StartupAppEdit),
     mNewAppTemplate("[Desktop Entry]\n"
-                    "Name=%1\n"
-                    "Comment=%2\n"
-                    "Exec=%3\n"
                     "Type=Application\n"
+                    "Name=%1\n"
+                    "GenericName=%2\n"
+                    "Comment=%3\n"
+                    "Icon=%4\n"
+                    "Hidden=false\n"
+                    "Exec=%5\n"
                     "Terminal=false\n"
-                    "Hidden=false\n")
+                    "X-GNOME-Autostart-enabled=true\n"
+                    "X-GNOME-Autostart-Delay=5\n")
 {
     ui->setupUi(this);
 
@@ -31,9 +35,8 @@ StartupAppEdit::StartupAppEdit(QWidget *parent) :
 
 void StartupAppEdit::init()
 {
-    setGeometry(
-        QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
-                            size(), qApp->primaryScreen()->availableGeometry()));
+    setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(),
+                                    qApp->primaryScreen()->availableGeometry()));
 
     mAutostartPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/autostart";
 
@@ -46,7 +49,9 @@ void StartupAppEdit::show()
 {
     // clear fields
     ui->txtStartupAppName->clear();
+    ui->txtStartupAppGenericName->clear();
     ui->txtStartupAppComment->clear();
+    ui->txtStartupAppIcon->clear();
     ui->txtStartupAppCommand->clear();
     ui->lblErrorMsg->hide();
 
@@ -55,7 +60,9 @@ void StartupAppEdit::show()
 
         if (!lines.isEmpty()) {
             ui->txtStartupAppName->setText(Utilities::getDesktopValue(NAME_REG, lines));
+            ui->txtStartupAppGenericName->setText(Utilities::getDesktopValue(GENERIC_NAME_REG, lines));
             ui->txtStartupAppComment->setText(Utilities::getDesktopValue(COMMENT_REG, lines));
+            ui->txtStartupAppIcon->setText(Utilities::getDesktopValue(ICON_REG, lines));
             ui->txtStartupAppCommand->setText(Utilities::getDesktopValue(EXEC_REG, lines));
         }
     }
@@ -81,7 +88,9 @@ void StartupAppEdit::on_btnSave_clicked()
             QStringList lines = FileUtil::readListFromFile(selectedFilePath);
 
             changeDesktopValue(lines, NAME_REG, QString("Name=%1").arg(ui->txtStartupAppName->text()));
+            changeDesktopValue(lines, GENERIC_NAME_REG, QString("GenericName=%1").arg(ui->txtStartupAppGenericName->text()));
             changeDesktopValue(lines, COMMENT_REG, QString("Comment=%1").arg(ui->txtStartupAppComment->text()));
+            changeDesktopValue(lines, ICON_REG, QString("Icon=%1").arg(ui->txtStartupAppIcon->text()));
             changeDesktopValue(lines, EXEC_REG, QString("Exec=%1").arg(ui->txtStartupAppCommand->text()));
 
             FileUtil::writeFile(selectedFilePath, lines.join("\n"), QIODevice::ReadWrite | QIODevice::Truncate);
@@ -89,7 +98,9 @@ void StartupAppEdit::on_btnSave_clicked()
             // new file content
             QString appContent = mNewAppTemplate
                                      .arg(ui->txtStartupAppName->text())
+                                     .arg(ui->txtStartupAppGenericName->text())
                                      .arg(ui->txtStartupAppComment->text())
+                                     .arg(ui->txtStartupAppIcon->text())
                                      .arg(ui->txtStartupAppCommand->text());
 
             // file name
@@ -115,6 +126,5 @@ void StartupAppEdit::on_btnSave_clicked()
 bool StartupAppEdit::isValid()
 {
     return !ui->txtStartupAppName->text().isEmpty() &&
-           !ui->txtStartupAppComment->text().isEmpty() &&
            !ui->txtStartupAppCommand->text().isEmpty();
 }

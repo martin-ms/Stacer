@@ -8,7 +8,9 @@
 
 #define NAME_REG QRegularExpression("^Name=.*")
 #define COMMENT_REG QRegularExpression("^Comment=.*")
+#define GENERIC_NAME_REG QRegularExpression("^GenericName=.*")
 #define EXEC_REG QRegularExpression("^Exec=.*")
+#define ICON_REG QRegularExpression("^Icon=.*")
 #define GNOME_ENABLED_REG QRegularExpression("^X-GNOME-Autostart-enabled=.*")
 #define HIDDEN_REG QRegularExpression("^Hidden=.*")
 

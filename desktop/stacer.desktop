@@ -1,8 +1,10 @@
 [Desktop Entry]
+Type=Application
 Name=Stacer
 GenericName=Linux System Optimizer and Monitoring
-Type=Application
-Terminal=false
-Exec=stacer
+Comment=Optimize and monitor your Linux system
 Icon=stacer
+Hidden=false
+Exec=stacer
+Terminal=false
 Categories=Utility;System;Monitor

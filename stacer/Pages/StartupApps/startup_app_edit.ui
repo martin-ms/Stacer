@@ -52,10 +52,31 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="2" column="0" colspan="2">
+    <widget class="QLineEdit" name="txtStartupAppGenericName">
+     <property name="placeholderText">
+      <string>Generic Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
     <widget class="QLineEdit" name="txtStartupAppComment">
      <property name="placeholderText">
       <string>App Comment</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QLineEdit" name="txtStartupAppIcon">
+     <property name="placeholderText">
+      <string>App Icon</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QLineEdit" name="txtStartupAppCommand">
+     <property name="placeholderText">
+      <string>Command</string>
      </property>
     </widget>
    </item>
@@ -91,13 +112,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QLineEdit" name="txtStartupAppCommand">
-     <property name="placeholderText">
-      <string>Command</string>
-     </property>
-    </widget>
-   </item>
    <item row="7" column="0" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -115,7 +129,9 @@
  </widget>
  <tabstops>
   <tabstop>txtStartupAppName</tabstop>
+  <tabstop>txtStartupAppGenericName</tabstop>
   <tabstop>txtStartupAppComment</tabstop>
+  <tabstop>txtStartupAppIcon</tabstop>
   <tabstop>txtStartupAppCommand</tabstop>
   <tabstop>btnSave</tabstop>
  </tabstops>

@@ -138,12 +138,16 @@ void SettingsPage::on_checkAutostart_clicked(bool checked)
 {
     if (checked) {
         QString appTemplate = QString("[Desktop Entry]\n"
-                                      "Name=Stacer\n"
-                                      "Comment=Linux System Optimizer and Monitoring\n"
-                                      "Exec=stacer --hide \n"
                                       "Type=Application\n"
+                                      "Name=Stacer\n"
+                                      "GenericName=Linux System Optimizer and Monitoring\n"
+                                      "Comment=Optimize and monitor your Linux system\n"
+                                      "Icon=stacer\n"
+                                      "Hidden=false\n"
+                                      "Exec=stacer --hide\n"
                                       "Terminal=false\n"
-                                      "Hidden=false\n");
+                                      "X-GNOME-Autostart-enabled=true\n"
+                                      "X-GNOME-Autostart-Delay=5\n");
 
         FileUtil::writeFile(mStartupAppPath, appTemplate);
     } else {

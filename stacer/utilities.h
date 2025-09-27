@@ -31,10 +31,9 @@ class Utilities
     {
         QStringList filteredList = lines.filter(val);
         if (filteredList.count() > 0) {
-            QStringList directive = filteredList.first().trimmed().split("=");
-            if (directive.count() > 1) {
-                return directive.last().trimmed();
-            }
+            QString directive = filteredList.first().trimmed();
+            QString command = directive.section('=', 1);
+            return command.trimmed();
         }
         return QString("");
     }

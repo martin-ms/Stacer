@@ -136,7 +136,7 @@ The Stacer Dashboard:
 
 The Stacer Dashboard on Ubuntu:
 <p align="center">
-    <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-dashboard.png" width="700" alt="The Stacer Dashboard on Ubuntu">
+    <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-dashboard-ubuntu.png" width="700" alt="The Stacer Dashboard on Ubuntu">
 </p>
 
 The Stacer Startup Apps:

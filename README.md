@@ -139,6 +139,11 @@ The Stacer Dashboard on Ubuntu:
     <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-dashboard-ubuntu.png" width="700" alt="The Stacer Dashboard on Ubuntu">
 </p>
 
+The Stacer Dashboard on WSL:
+<p align="center">
+    <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-dashboard-wsl.png" width="700" alt="The Stacer Dashboard on WSL">
+</p>
+
 The Stacer Startup Apps:
 <p align="center">
     <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-startup-apps.png" width="700" alt="The Stacer Startup Apps">
@@ -189,6 +194,11 @@ The Stacer Resources system:
     <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-resources-system.png" width="700" alt="The Stacer Resources system">
 </p>
 
+The Stacer Helpers:
+<p align="center">
+    <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-helpers.png" width="700" alt="The Stacer Helpers">
+</p>
+
 The Stacer APT Repository Manager:
 <p align="center">
     <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-apt-repository-manager.png" width="700" alt="The Stacer APT Repository Manager">
@@ -202,11 +212,6 @@ The Stacer Gnome Settings:
 The Stacer Gnome Settings appearance:
 <p align="center">
     <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-gnome-settings-appearance.png" width="700" alt="The Stacer Gnome Settings appearance">
-</p>
-
-The Stacer Helpers:
-<p align="center">
-    <img src="https://raw.githubusercontent.com/QuentiumYT/Stacer/main/screenshots/Screenshot-helpers.png" width="700" alt="The Stacer Helpers">
 </p>
 
 The Stacer Settings:

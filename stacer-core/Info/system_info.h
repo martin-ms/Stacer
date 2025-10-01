@@ -8,7 +8,9 @@
 
 #include "stacer-core_global.h"
 
-#define LSCPU_COMMAND "LANG=nl_NL.UTF-8 lscpu"
+// Run command in English language (guarantee same behaviour across languages)
+#define LSCPU_COMMAND "LANG=en_US.UTF-8 lscpu"
+#define PROC_CPUINFO "/proc/cpuinfo"
 
 class STACERCORESHARED_EXPORT SystemInfo
 {

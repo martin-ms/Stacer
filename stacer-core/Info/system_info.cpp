@@ -11,26 +11,31 @@ SystemInfo::SystemInfo()
     QString speed;
 
     try {
-        QStringList lines = CommandUtil::exec("bash", { "-c", LSCPU_COMMAND }).split('\n'); // run command in English language (guarantee same behaviour across languages)
+        const QStringList lines = CommandUtil::exec("bash", { "-c", LSCPU_COMMAND }).split('\n');
 
         QRegularExpression regexp("\\s+");
         QString space(" ");
 
         QStringList filterModel = lines.filter(QRegularExpression("^Model name"));
-        QString modelLine = filterModel.isEmpty() ? "error missing model:error missing model" : filterModel.first();
+        QString modelLine = filterModel.isEmpty() ? "error: unknown" : filterModel.first();
+
         QStringList filterSpeed = lines.filter(QRegularExpression("^CPU max MHz"));
-        QString speedLine = "error:0.0";
         if (filterSpeed.isEmpty()) {
-            // fallback to CPU MHz
+            // fallback to CPU MHz (old lscpu versions)
             filterSpeed = lines.filter(QRegularExpression("^CPU MHz"));
         }
-        speedLine = filterSpeed.isEmpty() ? speedLine : filterSpeed.first();
+        if (filterSpeed.isEmpty()) {
+            // fallback to /proc/cpuinfo (no frequency in lscpu)
+            filterSpeed = FileUtil::readListFromFile(PROC_CPUINFO)
+                              .filter(QRegularExpression("^cpu MHz"));
+        }
+        QString speedLine = filterSpeed.isEmpty() ? "error: unknown" : filterSpeed.first();
 
         model = modelLine.split(":").last();
-        speed = speedLine.split(":").last();
+        speed = speedLine.split(":").last().replace(",", ".");
 
-        model = model.contains('@') ? model.split("@").first() : model; // intel : AMD
-        speed = QString::number(speed.toDouble() / 1000.0) + "GHz";
+        model = model.contains('@') ? model.split("@").first() : model;
+        speed = !speed.contains("unknown") ? QString::number(speed.toDouble() / 1000.0, 'g', 3).append(" GHz") : speed;
 
         this->cpuModel = model.trimmed().replace(regexp, space);
         this->cpuSpeed = speed.trimmed().replace(regexp, space);

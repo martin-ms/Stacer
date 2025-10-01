@@ -1,13 +1,12 @@
 #ifndef CPUINFO_H
 #define CPUINFO_H
 
-#include <QVector>
-
 #include "Utils/file_util.h"
 #include "stacer-core_global.h"
 
+// Run command in English language (guarantee same behaviour across languages)
+#define LSCPU_COMMAND "LANG=en_US.UTF-8 lscpu"
 #define PROC_CPUINFO "/proc/cpuinfo"
-#define LSCPU_COMMAND "LANG=nl_NL.UTF-8 lscpu"
 #define PROC_LOADAVG "/proc/loadavg"
 #define PROC_STAT "/proc/stat"
 

@@ -35,21 +35,38 @@ install -Dm755 build/stacer/stacer %{buildroot}/usr/bin/stacer
 # Install .desktop file
 install -Dm644 desktop/stacer.desktop %{buildroot}/usr/share/applications/stacer.desktop
 
+# Install metainfo file
+install -Dm644 build/desktop/fr.quentium.stacer.metainfo.xml %{buildroot}/usr/share/metainfo/fr.quentium.stacer.metainfo.xml
+
 # Install icon sizes
 for size in 16 32 64 128 256; do
     install -Dm644 icons/hicolor/${size}x${size}/apps/stacer.png \
         %{buildroot}/usr/share/icons/hicolor/${size}x${size}/apps/stacer.png
 done
 
+# Install translation files
+mkdir -p %{buildroot}/usr/share/qt6/translations
+install -Dm644 build/stacer/translations/*.qm %{buildroot}/usr/share/qt6/translations/
+
 # Install README doc
 install -Dm644 README.md %{buildroot}/usr/share/doc/stacer/README.md
+
+# Install changelog
+install -Dm644 debian/changelog %{buildroot}/usr/share/doc/stacer/changelog
+
+# Install copyright
+install -Dm644 LICENSE %{buildroot}/usr/share/doc/stacer/copyright
 
 %files
 %license
 %doc
 /usr/bin/stacer
 /usr/share/applications/stacer.desktop
-/usr/share/icons/hicolor/*/apps/stacer.png
 /usr/share/doc/stacer/README.md
+/usr/share/doc/stacer/changelog
+/usr/share/doc/stacer/copyright
+/usr/share/icons/hicolor/*/apps/stacer.png
+/usr/share/metainfo/fr.quentium.stacer.metainfo.xml
+/usr/share/qt6/translations/*.qm
 
 %changelog

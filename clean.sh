@@ -2,6 +2,15 @@
 
 rm -rf build
 rm -rf release
+rm -f translations/*.qm
+
+rm -rf rpm/BUILD/
+rm -rf rpm/BUILDROOT/
+rm -rf rpm/*RPMS/
+rm -rf rpm/SOURCES/
+rm -f debug*.list
+rm -f elfbins.list
+
 find . -name CMakeFiles -exec rm -rf {} +
 find . -name '*_autogen' -exec rm -rf {} +
 

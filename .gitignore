@@ -3,6 +3,7 @@
 
 build/
 release/
+translations/*.qm
 
 rpm/BUILD/
 rpm/BUILDROOT/

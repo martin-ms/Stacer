@@ -1,4 +1,5 @@
 #include "app_manager.h"
+#include <QLibraryInfo>
 
 AppManager *AppManager::instance = nullptr;
 
@@ -19,9 +20,18 @@ AppManager::AppManager()
 
     loadLanguageList();
 
-    //    loadThemeList();
+    // loadThemeList();
 
-    if (mTranslator.load(QString("stacer_%1").arg(mSettingManager->getLanguage()), qApp->applicationDirPath() + "/translations")) {
+    // Load from global qt translations path
+    QString translationPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+
+    // Fallback to local translations path if global path does not exist
+    QString folderTranslationPath = qApp->applicationDirPath() + "/translations";
+    if (QDir(folderTranslationPath).exists()) {
+        translationPath = folderTranslationPath;
+    }
+
+    if (mTranslator.load(QString("stacer_%1").arg(mSettingManager->getLanguage()), translationPath)) {
         qApp->installTranslator(&mTranslator);
         (mSettingManager->getLanguage() == "ar") ? qApp->setLayoutDirection(Qt::RightToLeft) : qApp->setLayoutDirection(Qt::LeftToRight);
     }

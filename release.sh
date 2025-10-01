@@ -6,7 +6,7 @@ ARCH_DPKG=$(dpkg --print-architecture)
 export VERSION=$VERSION
 
 # cleanup
-rm -rf release build rpm/BUILD rpm/BUILDROOT rpm/*RPMS rpm/SOURCES debug*.list elfbins.list
+rm -rf build release translations/*.qm rpm/BUILD rpm/BUILDROOT rpm/*RPMS rpm/SOURCES debug*.list elfbins.list
 
 # build
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
@@ -24,7 +24,7 @@ export PATH="/usr/lib/$QT_SELECT/bin:$PATH"
 lupdate stacer/stacer.pro -no-obsolete
 lrelease stacer/stacer.pro
 mkdir -p release/$DIR/stacer/translations
-mv translations/*.qm release/$DIR/stacer/translations
+cp translations/*.qm release/$DIR/stacer/translations
 
 # Change architecture
 sed -i "s/^Architecture:\s\+.*$/Architecture: $ARCH_DPKG/g" release/$DIR/debian/control

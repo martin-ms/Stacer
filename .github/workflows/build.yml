@@ -15,24 +15,24 @@ jobs:
         include:
           - os: ubuntu-24.04
             codename: noble
-            qt_version: 6.4.2
-            qt_arch: gcc_64
+            # qt_version: 6.4.2
+            # qt_arch: gcc_64
           - os: ubuntu-24.04-arm
             codename: noble-arm
-            qt_version: 6.7.0
-            qt_arch: linux_gcc_arm64
+            # qt_version: 6.7.0
+            # qt_arch: linux_gcc_arm64
           - os: ubuntu-22.04
             codename: jammy
-            qt_version: 6.2.4
-            qt_arch: gcc_64
+            # qt_version: 6.2.4
+            # qt_arch: gcc_64
           - os: ubuntu-22.04-arm
             codename: jammy-arm
-            qt_version: 6.7.0
-            qt_arch: linux_gcc_arm64
+            # qt_version: 6.7.0
+            # qt_arch: linux_gcc_arm64
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Update package repositories
         run: sudo apt-get update
@@ -70,6 +70,31 @@ jobs:
       - name: Update debian files
         run: |
           sed -i "s/^Architecture:\s\+.*$/Architecture: any/g" ${{ github.workspace }}/debian/control
+
+      - name: Get changelog
+        id: changelog
+        run: |
+          CHANGELOG=$(awk '/^stacer \(/ {if (NR!=1) exit} /^[ ]*\*/ {print}' debian/changelog)
+          echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        if: github.event_name != 'workflow_dispatch' && matrix.codename == 'jammy'
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: |
+            Fix and features:
+
+            {{ steps.changelog.outputs.changelog }}
+
+            NOTE: I'm now publishing GitHub Actions builds in every release, all previous self compiled binaries are now removed. deb, rpm and AppImage files are from the oldest supported Ubuntu version (currently jammy).
+
+            **Full Changelog**: https://github.com/QuentiumYT/Stacer/compare/main...${{ github.ref_name }}
+          files: |
+            ${{ github.workspace }}/release/stacer_*.deb
+            ${{ github.workspace }}/release/stacer-*.rpm
+            ${{ github.workspace }}/release/Stacer-*.AppImage
 
       - name: Publish PPA package
         uses: yuezk/publish-ppa-package@main

@@ -21,7 +21,7 @@ APTSourceManagerPage::APTSourceManagerPage(QWidget *parent) :
 
 void APTSourceManagerPage::init()
 {
-    ui->txtAptSource->setPlaceholderText(tr("example %1").arg("'deb http://archive.ubuntu.com/ubuntu/ jammy main'"));
+    ui->txtAptSource->setPlaceholderText(tr("example %1").arg("'ppa:deadsnakes/ppa'"));
 
     loadAptSources();
 
@@ -39,10 +39,11 @@ void APTSourceManagerPage::loadAptSources()
 {
     ui->listWidgetAptSources->clear();
 
+    selectedAptSource.clear(); // Clear selection after reload
+
     QList<APTSourcePtr> aptSourceList = ToolManager::ins()->getSourceList();
 
     for (APTSourcePtr &aptSource : aptSourceList) {
-
         QListWidgetItem *listItem = new QListWidgetItem(ui->listWidgetAptSources);
         listItem->setData(5, aptSource->source); // for search
 
@@ -55,8 +56,7 @@ void APTSourceManagerPage::loadAptSources()
 
     ui->notFoundWidget->setVisible(aptSourceList.isEmpty());
 
-    ui->lblAptSourceTitle->setText(tr("APT Repositories (%1)")
-                                       .arg(aptSourceList.count()));
+    ui->lblAptSourceTitle->setText(tr("APT Repositories (%1)").arg(aptSourceList.count()));
 }
 
 void APTSourceManagerPage::on_btnAddAPTSourceRepository_clicked(bool checked)
@@ -68,12 +68,18 @@ void APTSourceManagerPage::on_btnAddAPTSourceRepository_clicked(bool checked)
         QString aptSourceRepository = ui->txtAptSource->text().trimmed();
 
         if (!aptSourceRepository.isEmpty()) {
+            ui->btnAddAPTSourceRepository->setText(tr("Adding..."));
+            ui->btnAddAPTSourceRepository->setEnabled(false);
+            QApplication::processEvents(); // force UI update
+
             ToolManager::ins()->addAPTRepository(aptSourceRepository, ui->checkEnableSource->isChecked());
 
+            ui->btnAddAPTSourceRepository->setEnabled(true);
             ui->txtAptSource->clear();
             ui->checkEnableSource->setChecked(false);
             on_btnCancel_clicked();
             loadAptSources();
+            on_txtSearchAptSource_textChanged(ui->txtSearchAptSource->text());
         }
     }
 }
@@ -118,7 +124,9 @@ void APTSourceManagerPage::on_btnDeleteAptSource_clicked()
 {
     if (!selectedAptSource.isNull()) {
         ToolManager::ins()->removeAPTSource(selectedAptSource);
+        selectedAptSource.clear(); // Clear selection after delete
         loadAptSources();
+        on_txtSearchAptSource_textChanged(ui->txtSearchAptSource->text());
     }
 }
 
@@ -139,6 +147,7 @@ void APTSourceManagerPage::on_btnEditAptSource_clicked()
         if (mAptSourceEditDialog.isNull()) {
             mAptSourceEditDialog = QSharedPointer<APTSourceEdit>(new APTSourceEdit(this));
             connect(mAptSourceEditDialog.data(), &APTSourceEdit::saved, this, &APTSourceManagerPage::loadAptSources);
+            connect(mAptSourceEditDialog.data(), &APTSourceEdit::saved, [this]() { selectedAptSource.clear(); });
         }
         APTSourceEdit::selectedAptSource = selectedAptSource;
         mAptSourceEditDialog->show();

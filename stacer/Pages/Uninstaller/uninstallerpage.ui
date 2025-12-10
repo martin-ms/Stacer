@@ -75,7 +75,7 @@
           </size>
          </property>
          <property name="accessibleName">
-          <string>notFoundWidget</string>
+          <string notr="true">notFoundWidget</string>
          </property>
          <property name="styleSheet">
           <string notr="true"/>
@@ -198,7 +198,7 @@
           </size>
          </property>
          <property name="accessibleName">
-          <string>notFoundWidget</string>
+          <string notr="true">notFoundWidget</string>
          </property>
          <property name="styleSheet">
           <string notr="true"/>

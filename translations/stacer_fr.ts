@@ -45,8 +45,8 @@
     </message>
     <message>
         <location filename="../stacer/Pages/AptSourceManager/apt_source_edit.ui" line="133"/>
-        <source>Distribution</source>
-        <translation>Distribution</translation>
+        <source>Suites</source>
+        <translation>Suites</translation>
     </message>
     <message>
         <location filename="../stacer/Pages/AptSourceManager/apt_source_edit.ui" line="152"/>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.ui" line="338"/>
-        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="85"/>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="91"/>
         <source>Add Repository</source>
         <translation>Ajouter un dépôt</translation>
     </message>
@@ -113,7 +113,7 @@
         <translation>exemple %1</translation>
     </message>
     <message>
-        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="58"/>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="59"/>
         <source>APT Repositories (%1)</source>
         <translation>Dépôt APT (%1)</translation>
     </message>
@@ -121,6 +121,11 @@
         <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="65"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
+    </message>
+    <message>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="71"/>
+        <source>Adding...</source>
+        <translation>Ajout...</translation>
     </message>
 </context>
 <context>
@@ -616,7 +621,7 @@
     <message>
         <location filename="../stacer/Pages/Helpers/host_manage.cpp" line="39"/>
         <source>Full Qualified</source>
-        <translation type="unfinished"></translation>
+        <translation>Domaine complet</translation>
     </message>
     <message>
         <location filename="../stacer/Pages/Helpers/host_manage.cpp" line="137"/>
@@ -1280,12 +1285,12 @@
     <message>
         <location filename="../stacer/Pages/StartupApps/startup_app_edit.ui" line="58"/>
         <source>Generic Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom générique</translation>
     </message>
     <message>
         <location filename="../stacer/Pages/StartupApps/startup_app_edit.ui" line="72"/>
         <source>App Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icône de l’application</translation>
     </message>
     <message>
         <location filename="../stacer/Pages/StartupApps/startup_app_edit.ui" line="79"/>
@@ -1415,12 +1420,6 @@
         <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="14"/>
         <source>Uninstaller</source>
         <translation>Désinstallateur</translation>
-    </message>
-    <message>
-        <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="78"/>
-        <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="201"/>
-        <source>notFoundWidget</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="371"/>

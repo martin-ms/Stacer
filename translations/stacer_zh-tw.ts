@@ -45,7 +45,7 @@
     </message>
     <message>
         <location filename="../stacer/Pages/AptSourceManager/apt_source_edit.ui" line="133"/>
-        <source>Distribution</source>
+        <source>Suites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.ui" line="338"/>
-        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="85"/>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="91"/>
         <source>Add Repository</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,7 +113,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="58"/>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="59"/>
         <source>APT Repositories (%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -121,6 +121,11 @@
         <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="65"/>
         <source>Save</source>
         <translation>儲存</translation>
+    </message>
+    <message>
+        <location filename="../stacer/Pages/AptSourceManager/apt_source_manager_page.cpp" line="71"/>
+        <source>Adding...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1426,12 +1431,6 @@
         <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="14"/>
         <source>Uninstaller</source>
         <translation>解除安裝</translation>
-    </message>
-    <message>
-        <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="78"/>
-        <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="201"/>
-        <source>notFoundWidget</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../stacer/Pages/Uninstaller/uninstallerpage.ui" line="340"/>
